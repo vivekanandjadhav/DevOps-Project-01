@@ -2,12 +2,13 @@
 
 pipeline{
     agent any
-    //parameters{
-        
-    //}
+    parameters{
+        choice(name: 'action', choices: 'create\ndelete', description: 'Choose create/Destroy')
+        string(name: 'aws_account_id', description: " AWS Account ID", defaultValue: '966120781179')
+    }
     stages{
          stage("Git Checkout"){
-                    //when { expression {  params.action == 'create' } }    
+                    when { expression {  params.action == 'create' } }    
             steps{
             gitCheckout(
                 branch: "master",
