@@ -1,0 +1,19 @@
+@Library('my-shared-library') _
+
+pipeline{
+    agent any
+    parameters{
+        
+    }
+    stages{
+         stage("Git Checkout"){
+                    when { expression {  params.action == 'create' } }    
+            steps{
+            gitCheckout(
+                branch: "master",
+                url: "https://github.com/vivekanandjadhav/DevOps-Project-01.git"
+            )
+            }
+        }
+    }
+}
