@@ -7,7 +7,7 @@ pipeline{
         string(name: 'aws_account_id', description: " AWS Account ID", defaultValue: '966120781179')
     }
     stages{
-         stage("Git Checkout"){
+        stage("Git Checkout"){
                     when { expression {  params.action == 'create' } }    
             steps{
             gitCheckout(
@@ -15,6 +15,14 @@ pipeline{
                 url: "https://github.com/vivekanandjadhav/DevOps-Project-01.git"
             )
             }
+        }
+        stage("Unit Test Maven"){
+                when { expression {  params.action == 'create' } }
+            steps{
+               script{  
+                   mvnTest()
+               }
+            }       
         }
     }
 }
